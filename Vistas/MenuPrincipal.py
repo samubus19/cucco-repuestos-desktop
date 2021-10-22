@@ -1,4 +1,6 @@
 import tkinter
+from Controladores.ProductoController import *
+from Vistas.ListaProductos import *
 
 fuente      = 'Helvetica'
 negrita     = 'bold'
@@ -22,7 +24,7 @@ class MenuPrincipal():
         self.btnClientes.grid(row=0, column=2, sticky="w")
         
         #ACCESO RAPIDO,PRODUCTOS
-        self.btnProductos = tkinter.Button(self.root, bd=1, relief="ridge", compound="top",font=(fuente,8,negrita),fg=colorNegro, bg=colorBlanco, text="Productos\n\n")
+        self.btnProductos = tkinter.Button(self.root, bd=1, relief="ridge", compound="top",font=(fuente,8,negrita),fg=colorNegro, bg=colorBlanco, text="Productos\n\n", command=self.abrirVentanaProductos)
         self.btnProductos.grid(row=0, column=4, sticky="w", columnspan=1)
 
         #ACCESO RAPIDO, BUSCAR PRODUCTOS
@@ -40,3 +42,9 @@ class MenuPrincipal():
         #ACCESO RAPIDO, CONFIGURACIONES
         self.btnConfiguraciones = tkinter.Button(self.root, bd=1, relief="ridge",font=(fuente,8,negrita),compound="top", fg=colorNegro, bg=colorBlanco, text="Config\n\n")
         self.btnConfiguraciones.grid(row=0, column=11, sticky="w", columnspan=1)
+
+
+        self.root.mainloop()
+
+    def abrirVentanaProductos(self):
+        ventanaProductos = ListaProductos()

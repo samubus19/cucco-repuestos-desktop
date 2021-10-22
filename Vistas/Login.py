@@ -41,7 +41,6 @@ class LoginView(object):
             contrasenia = self.contraseniaInput.get(), 
             email       = self.emailInput.get()
         )
-        datosLogin.iniciarSesion()
-
         self.root.destroy()
+        datosLogin.iniciarSesion()
         

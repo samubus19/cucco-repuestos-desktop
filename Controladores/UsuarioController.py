@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 from Vistas import MenuPrincipal
 
 class UsuarioController():
@@ -14,13 +15,13 @@ class UsuarioController():
         req  = requests.post('http://localhost:4000/user/login', data=body)
 
         if(req.status_code == 200):
-            with open('E:/SAMUEL-E/UNIVERSIDAD/4° AÑO/ING_DE_SOFTWARE/Trabajo-Final-Cucco-Repuestos/cucco-repuestos-desktop/token.json', 'w') as archivo:
+            with open(os.path.join(os.getcwd(), 'token.json'), 'w') as archivo:
                 json.dump(json.loads(req.text), archivo , indent=4)
+            # print(os.getcwd())
 
             menu = MenuPrincipal.MenuPrincipal()
         else:
             print('Datos incorrectos')        
-        print(req.text)
 
     def registrarUsuario(self):
         pass
