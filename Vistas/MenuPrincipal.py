@@ -1,6 +1,7 @@
 import tkinter
 from Controladores.ProductoController import *
 from Vistas.ListaProductos import *
+from Vistas.ListaVentas import *
 
 fuente      = 'Helvetica'
 negrita     = 'bold'
@@ -25,26 +26,21 @@ class MenuPrincipal():
         
         #ACCESO RAPIDO,PRODUCTOS
         self.btnProductos = tkinter.Button(self.root, bd=1, relief="ridge", compound="top",font=(fuente,8,negrita),fg=colorNegro, bg=colorBlanco, text="Productos\n\n", command=self.abrirVentanaProductos)
-        self.btnProductos.grid(row=0, column=4, sticky="w", columnspan=1)
+        self.btnProductos.grid(row=0, column=3, sticky="w", columnspan=1)
 
-        #ACCESO RAPIDO, BUSCAR PRODUCTOS
-        self.btnBuscarProducto = tkinter.Button(self.root, bd=1, relief="ridge",font=(fuente,8,negrita),compound="top", fg=colorNegro, bg=colorBlanco, text="Buscar \nProducto\n")
-        self.btnBuscarProducto.grid(row=0, column=5, sticky="w", columnspan=1)
-
-        #ACCESO RAPIDO, BUSCAR REMITO
-        self.btnBuscarRemito = tkinter.Button(self.root, bd=1, relief="ridge",font=(fuente,8,negrita), compound="top", fg=colorNegro, bg=colorBlanco, text="Buscar\nRemito\n")
-        self.btnBuscarRemito.grid(row=0, column=9, sticky="ew")
-
-        #ACCESO RAPIDO, REPORTES ORDENES TRABAJO
-        self.btnReporte = tkinter.Button(self.root, bd=1, relief="ridge",font=(fuente,8,negrita), compound="top", fg=colorNegro, bg=colorBlanco, text="Reportes\nOrdenes\nde Trabajo")
-        self.btnReporte.grid(row=0, column=10, sticky="ew")
+        #ACCESO RAPIDO,VENTAS
+        self.btnVentas = tkinter.Button(self.root, bd=1, relief="ridge", compound="top",font=(fuente,8,negrita),fg=colorNegro, bg=colorBlanco, text="Ventas\n\n", command=self.abrirVentanaVentas)
+        self.btnVentas.grid(row=0, column=4, sticky="w", columnspan=1)
 
         #ACCESO RAPIDO, CONFIGURACIONES
         self.btnConfiguraciones = tkinter.Button(self.root, bd=1, relief="ridge",font=(fuente,8,negrita),compound="top", fg=colorNegro, bg=colorBlanco, text="Config\n\n")
-        self.btnConfiguraciones.grid(row=0, column=11, sticky="w", columnspan=1)
+        self.btnConfiguraciones.grid(row=0, column=5, sticky="w", columnspan=1)
 
 
         self.root.mainloop()
 
     def abrirVentanaProductos(self):
         ventanaProductos = ListaProductos()
+
+    def abrirVentanaVentas(self):
+        ventanaVentas    = ListaVentas()

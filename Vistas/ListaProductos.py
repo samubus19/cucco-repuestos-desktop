@@ -7,13 +7,15 @@ class ListaProductos():
         #CREACION VENTANA
         self.root = tkinter.Toplevel()
         self.root.resizable(tkinter.FALSE, tkinter.FALSE)
-     
+
+        self.lblTitulo = ttk.Label(self.root, text='Productos')
+        self.lblTitulo.grid(row=0, column=0, columnspan=2)
+
         #CREACION TABLA
         self.tablaProductos = ttk.Treeview(self.root, selectmode = 'browse')
         self.tablaProductos.grid(
-            row        = 0, 
+            row        = 1, 
             column     = 0, 
-            columnspan = 6, 
             sticky     = "nsew", 
             padx       = 5, 
             pady       = 10
@@ -23,7 +25,7 @@ class ListaProductos():
         self.scrollbarTabla = ttk.Scrollbar(self.root, orient = "vertical", command=self.tablaProductos.yview)
         self.scrollbarTabla.grid(
             row    = 1, 
-            column = 7, 
+            column = 1, 
             sticky = "nsew",
             pady=10)
 
