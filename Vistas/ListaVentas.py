@@ -2,7 +2,9 @@ import tkinter
 from tkinter import ttk
 from Controladores.VentasController import *
 from Helpers.Format_fechas import *
+from Singleton import singleton
 
+@singleton
 class ListaVentas():
     def __init__(self) -> None:
         #CREACION VENTANA

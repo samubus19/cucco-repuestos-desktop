@@ -1,0 +1,10 @@
+
+FUENTE_1        = 'PT Sans'
+COLOR_1         = '#F44336'
+COLOR_2         = '#F2F2F2'
+COLOR_BLANCO    = '#FFFFFF'
+COLOR_NEGRO     = '#000000'
+ESTILO_FUENTE_1 = 'bold'
+TAMAÑO_FUENTE_S = 8
+TAMAÑO_FUENTE_M = 11
+TAMAÑO_FUENTE_L = 14

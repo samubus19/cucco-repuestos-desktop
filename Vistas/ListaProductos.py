@@ -1,7 +1,9 @@
 import tkinter
 from tkinter import ttk
 from Controladores.ProductoController import *
+from Singleton import singleton
 
+@singleton
 class ListaProductos():
     def __init__(self) -> None:
         #CREACION VENTANA
