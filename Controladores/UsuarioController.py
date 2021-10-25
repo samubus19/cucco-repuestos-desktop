@@ -2,16 +2,11 @@ import requests
 import json
 import os
 from Vistas import MenuPrincipal
-
+import LectorToken
 class UsuarioController():
 
-    def __init__(self, usuario, contrasenia, email) -> None:
-        self.usuario     = usuario
-        self.contrasenia = contrasenia
-        self.email       = email
-
-    def iniciarSesion(self):
-        body = {'usuario' : self.usuario, 'contrasenia' : self.contrasenia, 'email' : self.email}
+    def iniciarSesion(self, usuario, contrasenia, email):
+        body = {'usuario' : usuario, 'contrasenia' : contrasenia, 'email' : email}
         req  = requests.post('http://localhost:4000/user/login', data=body)
 
         if(req.status_code == 200):
@@ -23,5 +18,11 @@ class UsuarioController():
         else:
             print('Datos incorrectos')        
 
-    def registrarUsuario(self):
-        pass
+    def obtenerUsuarios(self):
+        headers = {
+            'Authorization' : LectorToken.obtenerToken()
+        }
+        req           = requests.get('http://localhost:4000/user/all', headers=headers)
+
+        usuariosJson  = json.loads(req.text)
+        return usuariosJson

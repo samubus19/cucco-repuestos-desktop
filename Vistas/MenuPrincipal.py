@@ -2,6 +2,8 @@ import tkinter
 from Controladores.ProductoController import *
 from Vistas.ListaProductos import *
 from Vistas.ListaVentas import *
+from Vistas.ListaClientes import *
+from Vistas.ListaUsuarios import *
 import Definiciones
 class MenuPrincipal():
     def __init__(self) -> None:
@@ -19,7 +21,8 @@ class MenuPrincipal():
             font     = (Definiciones.FUENTE_1,Definiciones.TAMAÑO_FUENTE_M,Definiciones.ESTILO_FUENTE_1), 
             fg       = Definiciones.COLOR_NEGRO, 
             bg       = Definiciones.COLOR_BLANCO, 
-            text     = "Usuarios\n\n"
+            text     = "Usuarios\n\n",
+            command=self.abrirVentanaUsuarios
         )
         self.btnUsuarios.grid(row=0, column=1, sticky="w")
 
@@ -31,7 +34,8 @@ class MenuPrincipal():
             font     =(Definiciones.FUENTE_1, Definiciones.TAMAÑO_FUENTE_M , Definiciones.ESTILO_FUENTE_1),
             fg       = Definiciones.COLOR_NEGRO, 
             bg       = Definiciones.COLOR_BLANCO, 
-            text     = "Clientes\n\n"
+            text     = "Clientes\n\n",
+            command  = self.abrirVentanaClientes
         )
         self.btnClientes.grid(row=0, column=2, sticky="w")
         
@@ -67,3 +71,9 @@ class MenuPrincipal():
 
     def abrirVentanaVentas(self):
         ventanaVentas    = ListaVentas()
+
+    def abrirVentanaUsuarios(self):
+        ventanaUsuarios  = ListaUsuarios()
+    
+    def abrirVentanaClientes(self):
+        ventanaClientes  = ListaClientes()

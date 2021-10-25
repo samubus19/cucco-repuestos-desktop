@@ -55,11 +55,11 @@ class LoginView(object):
         self.root.mainloop()
 
     def iniciarSesion(self):
-        datosLogin = UsuarioController(
+        datosLogin = UsuarioController()
+        self.root.destroy()
+        datosLogin.iniciarSesion(
             usuario     = self.usuarioInput.get(), 
             contrasenia = self.contraseniaInput.get(), 
             email       = self.emailInput.get()
         )
-        self.root.destroy()
-        datosLogin.iniciarSesion()
         
