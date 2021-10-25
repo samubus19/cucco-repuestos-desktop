@@ -3,6 +3,7 @@ from tkinter import ttk
 from Controladores.VentasController import *
 from Helpers.Format_fechas import *
 from Singleton import singleton
+import Definiciones
 
 @singleton
 class ListaVentas():
@@ -10,12 +11,17 @@ class ListaVentas():
         #CREACION VENTANA
         self.root = tkinter.Toplevel()
         self.root.resizable(tkinter.FALSE, tkinter.FALSE)
+        self.root.configure(background=Definiciones.COLOR_2)
 
-        self.lblTitulo = ttk.Label(self.root, text='Ventas')
-        self.lblTitulo.grid(row=0, column=0, columnspan=2)
+
+        Definiciones.estiloTablas(self.root)
+        Definiciones.estiloLabelTitulo(self.root)
+
+        self.lblTitulo = ttk.Label(self.root, text='Ventas', style='titulo.TLabel')
+        self.lblTitulo.grid(row=0, column=0, columnspan=2, pady=8)
 
         #CREACION TABLA
-        self.tablaVentas = ttk.Treeview(self.root, selectmode = 'browse')
+        self.tablaVentas = ttk.Treeview(self.root, selectmode = 'browse', style='mystyle.Treeview')
         self.tablaVentas.grid(
             row        = 1, 
             column     = 0, 

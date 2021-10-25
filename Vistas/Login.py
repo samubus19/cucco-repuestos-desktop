@@ -4,38 +4,53 @@ import sys
 from Singleton import *
 from Controladores.UsuarioController import *
 import Definiciones
+import PIL
+from PIL import ImageTk
+from PIL import Image
 
 @singleton
 class LoginView(object):
     def __init__(self) -> None:
 
-
-        self.root             = tkinter.Tk()
+        self.root           = tkinter.Tk()
         self.root.config(bg = Definiciones.COLOR_2)
+        self.root.columnconfigure(0, weight=1)
+        self.root.geometry("400x350")
+
+
+        Definiciones.estiloBotonNormal(self.root)#Inicializamos el estilo de los botones
+        Definiciones.estiloLabel1(self.root)#Inicializamos el estilo de las etiquetas
 
         self.usuarioInput     = tkinter.StringVar()
         self.contraseniaInput = tkinter.StringVar() 
         self.emailInput       = tkinter.StringVar() 
 
-        self.lblUsuario       = ttk.Label(self.root, text='Usuario', background=Definiciones.COLOR_2)
-        self.lblUsuario.grid(row=0, column=0, columnspan=2)
-        self.tbUsuario        = tkinter.Entry(self.root, bd=2, width=30, fg=Definiciones.COLOR_NEGRO, bg=Definiciones.COLOR_BLANCO, font=(Definiciones.FUENTE_1, 10), textvariable = self.usuarioInput)
-        self.tbUsuario.grid(row=1, column=0, padx=10,pady=25, columnspan=1, sticky="ns")       
+        #CREACION LOGO
+        self.imgLogo = PIL.Image.open(os.path.join(os.getcwd(), 'Imagenes/logo_naranja.png'))
+        # self.imgLogo = self.imgLogo.resize((100, 100), PIL.Image.ANTIALIAS)  # Redimension (Alto, Ancho)
+        self.imgLogo = PIL.ImageTk.PhotoImage(self.imgLogo)
+        self.lblLogo = ttk.Label(self.root, image=self.imgLogo)
+        self.lblLogo.grid(row=0, column=0, pady=8)
+
+        self.lblUsuario       = ttk.Label(self.root, text='Usuario', style='etiqueta.TLabel')
+        self.lblUsuario.grid(row=1, column=0)
+        self.tbUsuario        = ttk.Entry(self.root, textvariable = self.usuarioInput)
+        self.tbUsuario.grid(row=2, column=0, sticky="nswe", padx = 16, pady = 8)       
         
-        self.lblContrasenia   = ttk.Label(self.root, text='Usuario', background=Definiciones.COLOR_2)
-        self.lblContrasenia.grid(row=2, column=0, columnspan=2)
-        self.tbContrasenia    = tkinter.Entry(self.root, width=30, fg=Definiciones.COLOR_NEGRO, bd=2, bg=Definiciones.COLOR_BLANCO, font=(Definiciones.FUENTE_1, 10), textvariable = self.contraseniaInput)
-        self.tbContrasenia.grid(row="3", column="0", padx=10,pady=25, columnspan=1, sticky="ns")
+        self.lblContrasenia   = ttk.Label(self.root, text='Contraseña', style='etiqueta.TLabel')
+        self.lblContrasenia.grid(row=3, column=0, columnspan=2)
+        self.tbContrasenia    = ttk.Entry(self.root, show='*' ,textvariable = self.contraseniaInput)
+        self.tbContrasenia.grid(row=4, column=0, sticky="nsew", padx = 16, pady = 8)
         
         #Boton Ingresar
-        self.btnIngresar = tkinter.Button(self.root, text="Ingresar", width=35, fg=Definiciones.COLOR_BLANCO, bg=Definiciones.COLOR_1, bd=3, relief="flat", font=(Definiciones.FUENTE_1, 12), command=self.iniciarSesion)
-        self.btnIngresar.grid(row="4", column="0",pady=0.5, columnspan=1, sticky="nsew")
+        self.btnIngresar      = ttk.Button(self.root, text="Iniciar Sesión", style='botonNormal.TButton', command=self.iniciarSesion)
+        self.btnIngresar.grid(row=5, column=0, sticky="ew", padx = 16, pady = 8)
 
         #Boton Cancelar
-        self.btnCancelar      = tkinter.Button(self.root, text="Salir", width=35, fg=Definiciones.COLOR_BLANCO, bg=Definiciones.COLOR_1, bd=3, relief="flat", font=(Definiciones.FUENTE_1, 12), command = self.root.destroy)
-        self.btnCancelar.grid(row="5", column="0",pady=0, columnspan=1, sticky="nsew")
+        self.btnCancelar      = ttk.Button(self.root, text="Salir", style='botonNormal.TButton', command = self.root.destroy)
+        self.btnCancelar.grid(row=6, column=0, sticky="ew", padx = 16, pady = 8)
 
-
+        self.tbUsuario.focus() #Hacemos focus en el campo de usuario apenas se abra la ventana
 
         self.root.mainloop()
 

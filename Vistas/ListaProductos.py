@@ -2,19 +2,23 @@ import tkinter
 from tkinter import ttk
 from Controladores.ProductoController import *
 from Singleton import singleton
-
+import Definiciones
 @singleton
 class ListaProductos():
     def __init__(self) -> None:
         #CREACION VENTANA
         self.root = tkinter.Toplevel()
         self.root.resizable(tkinter.FALSE, tkinter.FALSE)
+        self.root.configure(background=Definiciones.COLOR_2)
 
-        self.lblTitulo = ttk.Label(self.root, text='Productos')
-        self.lblTitulo.grid(row=0, column=0, columnspan=2)
+        Definiciones.estiloTablas(self.root)
+        Definiciones.estiloLabelTitulo(self.root)
+
+        self.lblTitulo = ttk.Label(self.root, text='Productos', style='titulo.TLabel')
+        self.lblTitulo.grid(row=0, column=0, columnspan=2, pady=8)
 
         #CREACION TABLA
-        self.tablaProductos = ttk.Treeview(self.root, selectmode = 'browse')
+        self.tablaProductos = ttk.Treeview(self.root, selectmode = 'browse', style='mystyle.Treeview')
         self.tablaProductos.grid(
             row        = 1, 
             column     = 0, 
