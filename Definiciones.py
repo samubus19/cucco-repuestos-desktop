@@ -18,13 +18,27 @@ def estiloBotonNormal(layout_padre):
     style = ttk.Style(layout_padre)
     style.configure(
         'botonNormal.TButton', 
-        foreground = COLOR_BLANCO, 
-        background = COLOR_1, 
-        font       = (FUENTE_1, TAMAÑO_FUENTE_M),
+        foreground  = COLOR_BLANCO, 
+        background  = COLOR_1, 
+        font        = (FUENTE_1, TAMAÑO_FUENTE_M),
+        relief      = 'flat',
     )
-    style.map('TButton', background=[('active','red')])
+    style.map('botonNormal.TButton', background=[('active','red')])
 
-
+def estiloBotonCancelar(layout_padre):
+    style = ttk.Style(layout_padre)
+    style.configure(
+        'botonCancelar.TButton', 
+        foreground  = COLOR_1, 
+        background  = COLOR_BLANCO, 
+        font        = (FUENTE_1, TAMAÑO_FUENTE_M),
+        borderwidth = 1,
+        bordercolor = COLOR_1,
+        relief      = 'flat'
+    )
+    style.map('botonCancelar.TButton', 
+        background=[('active',COLOR_1)],
+        foreground=[('active', COLOR_BLANCO)])
 
 def estiloLabel1(layout_padre):
     style = ttk.Style(layout_padre)

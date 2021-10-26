@@ -5,7 +5,6 @@ from Helpers.Format_fechas import *
 from Singleton import singleton
 import Definiciones
 
-@singleton
 class ListaUsuarios():
     def __init__(self) -> None:
         #CREACION VENTANA

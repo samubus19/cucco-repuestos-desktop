@@ -9,7 +9,7 @@ from PIL import ImageTk
 from PIL import Image
 
 @singleton
-class LoginView(object):
+class LoginView():
     def __init__(self) -> None:
 
         self.root           = tkinter.Tk()
@@ -35,12 +35,12 @@ class LoginView(object):
         self.lblUsuario       = ttk.Label(self.root, text='Usuario', style='etiqueta.TLabel')
         self.lblUsuario.grid(row=1, column=0)
         self.tbUsuario        = ttk.Entry(self.root, textvariable = self.usuarioInput)
-        self.tbUsuario.grid(row=2, column=0, sticky="nswe", padx = 16, pady = 8)       
+        self.tbUsuario.grid(row=2, column=0, sticky="we", padx = 16, pady = 8)       
         
         self.lblContrasenia   = ttk.Label(self.root, text='Contraseña', style='etiqueta.TLabel')
         self.lblContrasenia.grid(row=3, column=0, columnspan=2)
         self.tbContrasenia    = ttk.Entry(self.root, show='*' ,textvariable = self.contraseniaInput)
-        self.tbContrasenia.grid(row=4, column=0, sticky="nsew", padx = 16, pady = 8)
+        self.tbContrasenia.grid(row=4, column=0, sticky="ew", padx = 16, pady = 8)
         
         #Boton Ingresar
         self.btnIngresar      = ttk.Button(self.root, text="Iniciar Sesión", style='botonNormal.TButton', command=self.iniciarSesion)

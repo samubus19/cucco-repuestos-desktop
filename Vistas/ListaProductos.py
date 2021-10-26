@@ -3,7 +3,6 @@ from tkinter import ttk
 from Controladores.ProductoController import *
 from Singleton import singleton
 import Definiciones
-@singleton
 class ListaProductos():
     def __init__(self) -> None:
         #CREACION VENTANA
@@ -81,3 +80,4 @@ class ListaProductos():
             producto['precio_compra'],
             )
             )
+    
