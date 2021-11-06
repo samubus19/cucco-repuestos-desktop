@@ -14,20 +14,15 @@ class FormProducto():
         # self.root.columnconfigure(0, weight=1)
         # self.root.geometry("400x350")
         #!Inicializacion de las variables que ingresa el usuario
-        self.bandera           = bandera
-        # self.nombreInput       = StringVar()
-        # self.descripcionInput  = StringVar() 
-        # self.precioCompraInput = StringVar() 
-        # self.precioVentaInput  = () 
-        # self.stockInput        = IntVar() 
-        # self.marcaInput        = StringVar() 
-        # self.categoriaInput = StringVar() 
-
+        self.bandera            = bandera
+        self.productoController = ProductoController() 
+  
         #Inicializacion de los estilos
         Definiciones.estiloBotonNormal(self.root)#Inicializamos el estilo de los botones
         Definiciones.estiloLabel1(self.root)#Inicializamos el estilo de las etiquetas
         Definiciones.estiloLabelTitulo(self.root)#Inicializamos el estilo de las etiquetas
         Definiciones.estiloBotonCancelar(self.root)#Inicializamos el estilo de las etiquetas
+        Definiciones.estiloCombobox(self.root)
 
         self.lblTitulo        = ttk.Label(self.root, text="Nuevo producto", style='titulo.TLabel')
         self.lblTitulo.grid(row=0, column=0, columnspan=2)
@@ -49,8 +44,8 @@ class FormProducto():
         
         self.lblCategoria  = ttk.Label(self.root, text='Categoría', style='etiqueta.TLabel')
         self.lblCategoria.grid(row=4, column=0, padx = 16, pady = 8, sticky='e')
-        self.tbCategorias   = ttk.Entry(self.root )
-        self.tbCategorias.grid(row=4, column=1, padx = 16, pady = 8)
+        self.cbCategorias  = ttk.Combobox(self.root, state='readonly', style='TCombobox')
+        self.cbCategorias.grid(row=4, column=1, padx = 16, pady = 8)
         
         self.lblPrecioCompra  = ttk.Label(self.root, text='Precio de compra', style='etiqueta.TLabel')
         self.lblPrecioCompra.grid(row=5, column=0, padx = 16, pady = 8, sticky='e')
@@ -83,27 +78,34 @@ class FormProducto():
         self.btnCancelar      = ttk.Button(borde, text="Cancelar", style='botonCancelar.TButton', command = self.destruirVentana)
         self.btnCancelar.grid(row=0, column=0, sticky='ew')
 
+        self.llenarComboCategorias()
         self.tbNombre.focus() #Hacemos focus en el campo de usuario apenas se abra la ventana
-
 
     def seleccionarImagen(self):
         self.archivoImagen   = filedialog.askopenfilename(title="Seleccionar imagen", filetypes=(('Images', ('*.jpg', '*.png', '*.jpeg')), ))
 
     def agregarProducto(self):
         if(self.bandera == 0):
-            productoController = ProductoController()
-            productoController.agregarProducto(
+            self.productoController.agregarProducto(
                 nombre        = self.tbNombre.get(),
                 stock         = int(self.tbStock.get()),
                 descripcion   = self.tbDescripcion.get(),
                 precio_venta  = float(self.tbPrecioVenta.get()),
                 precio_compra = float(self.tbPrecioCompra.get()),
                 marca         = self.tbMarca.get(),
+                categoria     = self.cbCategorias.get(),
                 imagen        = self.archivoImagen
             )
             self.root.destroy()
         else:
             print("Aca iria para editar el producto")
+
+    def llenarComboCategorias(self):
+        categorias                  = self.productoController.obtenerCategorias()
+        listaCategorias = []
+        for categoria in categorias:
+            listaCategorias.append(categoria['nombre'])
+        self.cbCategorias['values'] = listaCategorias
 
     def destruirVentana(self):
         self.root.destroy()

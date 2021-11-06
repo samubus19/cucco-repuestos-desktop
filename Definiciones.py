@@ -1,4 +1,4 @@
-from tkinter import ttk
+from tkinter import Widget, font, ttk
 import tkinter
 
 
@@ -62,7 +62,7 @@ def estiloEntries(layout_padre):
     pass
 
 def estiloTablas(layout_padre):
-    style = ttk.Style()
+    style = ttk.Style(layout_padre)
     style.configure("mystyle.Treeview", highlightthickness=0, bd=0, font=(FUENTE_1, TAMAÑO_FUENTE_S), foreground=COLOR_NEGRO) # Modify the font of the body
     style.configure("mystyle.Treeview.Heading", font=(FUENTE_1, TAMAÑO_FUENTE_M, ESTILO_FUENTE_1), background=COLOR_1, foreground=COLOR_BLANCO) # Modify the font of the headings
     style.layout("mystyle.Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) # Remove the borders
@@ -70,3 +70,10 @@ def estiloTablas(layout_padre):
                 background = [('active', COLOR_3)],
                 foreground = [('active', COLOR_BLANCO)]
                 )
+
+def estiloCombobox(layout_padre):
+    style = ttk.Style(layout_padre)
+    style.configure('TCombobox',font=(FUENTE_1, TAMAÑO_FUENTE_M))
+    style.map('TCombobox', fieldbackground=[('readonly','white')])
+    style.map('TCombobox', selectbackground=[('readonly', 'white')])
+    style.map('TCombobox', selectforeground=[('readonly', 'black')])

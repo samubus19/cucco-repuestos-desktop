@@ -15,7 +15,7 @@ class ProductoController():
         productosJson = json.loads(req.text)
         return productosJson
 
-    def agregarProducto(self, nombre, stock, descripcion, precio_venta, precio_compra, marca, imagen):
+    def agregarProducto(self, nombre, stock, descripcion, precio_venta, precio_compra, marca, categoria, imagen):
         my_headers = {
             'Authorization' : token
         }
@@ -26,6 +26,7 @@ class ProductoController():
             'precio_venta'  : precio_venta,
             'precio_compra' : precio_compra,
             'marca'         : marca,
+            categoria       : categoria
         }
         files = {
             'imagen' : open(imagen, 'rb'),
@@ -37,3 +38,11 @@ class ProductoController():
 
     def borrarProducto(self):
         pass
+
+
+    def obtenerCategorias(self):
+        headers = { 'Authorization' : token}
+        req     = requests.get('http://localhost:4000/categories/all', headers=headers)
+
+        categoriasJson = json.loads(req.text)
+        return categoriasJson
