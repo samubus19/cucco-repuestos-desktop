@@ -1,19 +1,15 @@
 import itertools 
 import os
 import os.path
+from re import sub
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from datetime import datetime
-from reportlab.lib.units import cm
-from tkinter import messagebox 
-from reportlab.lib.units import inch 
-from reportlab.lib.enums import TA_CENTER
-from reportlab.platypus import Paragraph
-from reportlab.lib.styles import ParagraphStyle
-from Controladores import ClienteController, VentasController, EmpresaController
+from Controladores import ClienteController, VentasController, EmpresaController, UsuarioController
 from Helpers.Format_fechas import formatearFecha
-from LectorToken import obtenerToken
-
+from tkinter import messagebox
+import webbrowser
+from Helpers import EnvioCorreoFactura
 
 fontRemito	= "Helvetica"
 data  		= []
@@ -25,6 +21,7 @@ class ImpresorPdf:
 		self.datosEmpresa = self.obtenerDatosEmpresa()
 		self.datosVenta   = self.obtenerDatosVenta() 
 		self.datosCliente = self.obtenerDatosCliente()
+		self.datosUsuario = self.obtenerDatosUsuario()
   
 	def grouper(self,iterable, n):
 		args = [iter(iterable)] * n
@@ -34,9 +31,6 @@ class ImpresorPdf:
 			now 	   = datetime.now()
 			dt_string  = now.strftime("%d%m%Y%H%M%S")
 			nombrePdf  = "Factura_"+str(self.datosVenta['_id']).zfill(15)+"_"+dt_string+".pdf"
-			# nombrePdf  = "Remito_"+str(resultOrdenTrabajo[7]).zfill(15)+".pdf"
-			# nombrePdf  	= 'archivoPdf.pdf'
-			print(os.path.join(os.getcwd(), 'Facturas_pdf/'))
 			rutaPdf    = os.path.join(os.getcwd(), 'Facturas_pdf/')
 
 			c 	       = canvas.Canvas(rutaPdf+nombrePdf, pagesize=A4)
@@ -50,7 +44,7 @@ class ImpresorPdf:
 
 			for rows in self.grouper(data, max_rows_per_page):
 
-				c.drawImage(os.path.join(os.getcwd(), 'Imagenes/logo_naranja.png'), 30, h - 205, width=190, height=190)
+				c.drawImage(os.path.join(os.getcwd(), 'Imagenes/logo_naranja.png'), 60, h - 180, width=150, height=150)
 				# print(os.path.join(os.getcwd(), 'Imagenes/logo_naranja.png'))
 	
 	
@@ -115,7 +109,7 @@ class ImpresorPdf:
 				
 				text = c.beginText(500, h - 820)
 				text.setFont(fontRemito, 14)
-				text.textLine(str(self.datosVenta['precio_total']))
+				text.textLine("$"+str(self.datosVenta['precio_total']))
 				c.drawText(text)
     
 				rows1 = data1
@@ -147,6 +141,16 @@ class ImpresorPdf:
     
     
 			c.save()
+   
+			if(messagebox.askyesno(message="¿Desea enviar la factura al siguiente correo "+self.datosUsuario['email']+"?", title="Aviso") == True ):
+				envioCorreoFactura = EnvioCorreoFactura.EnvioFacturaPdf(rutaPdf, self.datosUsuario['email'], nombrePdf)
+				envioCorreoFactura.enviarPdf()
+
+			if(messagebox.askyesno(message="¿Desea ver el remito en pantalla?", title="Aviso") == True ):
+				# archivo = os.popen(os.path.join(rutaPdf, nombrePdf)) 
+				webbrowser.open_new(rutaPdf+nombrePdf)
+			
+   
 
 
 	def obtenerDatosVenta(self):
@@ -160,8 +164,11 @@ class ImpresorPdf:
 	def obtenerDatosCliente(self):
 		clienteController = ClienteController.ClienteController()
 		return clienteController.obtenerClientePorId(self.datosVenta['id_cliente'])
-	
 
+	def obtenerDatosUsuario(self):
+		usuarioController = UsuarioController.UsuarioController()
+		return usuarioController.obtenerUsuarioPorId(self.datosVenta['id_usuario'])
+	
 	def selectProducto(self):
 		data.clear()
 		# print(self.datosVenta['productos'])
