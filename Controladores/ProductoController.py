@@ -26,7 +26,7 @@ class ProductoController():
             'precio_venta'  : precio_venta,
             'precio_compra' : precio_compra,
             'marca'         : marca,
-            categoria       : categoria
+            'categoria'     : categoria
         }
         files = {
             'imagen' : open(imagen, 'rb'),

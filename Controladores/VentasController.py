@@ -13,6 +13,13 @@ class VentasController():
 
         ventas  = json.loads(req.text)
         return ventas
+    
+    def obtenerVentaPorId(self, id_venta):
+        headers = { 'Authorization' : LectorToken.obtenerToken()}
+        req     = requests.get(f'http://localhost:4000/sales/{id_venta}', headers=headers)
+
+        ventas  = json.loads(req.text)
+        return ventas
 
 
     

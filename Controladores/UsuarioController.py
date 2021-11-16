@@ -26,3 +26,12 @@ class UsuarioController():
 
         usuariosJson  = json.loads(req.text)
         return usuariosJson
+    
+    def obtenerUsuarioPorId(self, idUsuario):
+        headers = {
+            'Authorization' : LectorToken.obtenerToken()
+        }
+        req           = requests.get(f'http://localhost:4000/user/{idUsuario}', headers=headers)
+
+        usuariosJson  = json.loads(req.text)
+        return usuariosJson

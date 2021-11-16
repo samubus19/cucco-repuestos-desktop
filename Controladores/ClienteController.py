@@ -13,3 +13,12 @@ class ClienteController():
 
         clientesJson  = json.loads(req.text)
         return clientesJson
+    
+    def obtenerClientePorId(self, idCliente):
+        headers = {
+            'Authorization' : LectorToken.obtenerToken()
+        }
+        req           = requests.get(f'http://localhost:4000/customer/{idCliente}', headers=headers)
+
+        clienteJson  = json.loads(req.text)
+        return clienteJson

@@ -105,6 +105,7 @@ class FormProducto():
         listaCategorias = []
         for categoria in categorias:
             listaCategorias.append(categoria['nombre'])
+        # print(listaCategorias)
         self.cbCategorias['values'] = listaCategorias
 
     def destruirVentana(self):
