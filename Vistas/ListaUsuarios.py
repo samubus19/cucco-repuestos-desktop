@@ -2,7 +2,6 @@ import tkinter
 from tkinter import ttk
 import Controladores.UsuarioController
 from Helpers.Format_fechas import *
-from Singleton import singleton
 import Definiciones
 
 class ListaUsuarios():

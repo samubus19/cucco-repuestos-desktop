@@ -1,7 +1,6 @@
 import tkinter
 from tkinter import IntVar, StringVar, ttk, filedialog
 from LectorToken import obtenerToken
-from Singleton import *
 import Definiciones
 from Controladores.ProductoController import *
 import Vistas.MenuPrincipal

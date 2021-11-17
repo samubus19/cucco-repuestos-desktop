@@ -1,7 +1,6 @@
 import tkinter
 from tkinter import ttk
 from Controladores.ProductoController import *
-from Singleton import singleton
 import Definiciones
 class ListaProductos():
     def __init__(self) -> None:

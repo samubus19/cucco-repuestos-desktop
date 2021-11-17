@@ -1,14 +1,13 @@
 import tkinter
 from tkinter import ttk
 import sys
-from Singleton import *
 from Controladores.UsuarioController import *
 import Definiciones
 import PIL
 from PIL import ImageTk
 from PIL import Image
 
-@singleton
+
 class LoginView():
     def __init__(self) -> None:
 

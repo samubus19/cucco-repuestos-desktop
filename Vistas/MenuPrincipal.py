@@ -5,8 +5,8 @@ from Vistas.ListaVentas import *
 from Vistas.ListaClientes import *
 from Vistas.ListaUsuarios import *
 from Vistas.FormProducto import *
+from Vistas.Configuraciones import *
 import Definiciones
-from Singleton import *
 class MenuPrincipal():
 
 
@@ -14,7 +14,7 @@ class MenuPrincipal():
         self.root = tkinter.Tk()
         self.root.title("Cucco Repuestos")
         self.root.columnconfigure(0, weight=1)
-        self.root.geometry("350x215+0+0")
+        self.root.geometry("350x245+0+0")
         # self.root.resizable(tkinter.FALSE, tkinter.FALSE)
         self.root.config(bg=Definiciones.COLOR_2)
         Definiciones.estiloBotonNormal(self.root)#Inicializamos el estilo de los botones
@@ -67,10 +67,20 @@ class MenuPrincipal():
         )
         self.btnVentas.grid(row=4, column=0, sticky="ew", pady=2)
 
+        
+        #ACCESO RAPIDO,CONFIGURACIONES
+        self.btnConfig = ttk.Button(
+            self.root,
+            style    = 'botonNormal.TButton',
+            text     = "Configuraciones", 
+            command  = self.abrirVentanaConfiguraciones
+        )
+        self.btnConfig.grid(row=5 ,column=0, sticky='ew')
+        
+        
         borde = tkinter.LabelFrame(self.root, bd=2, bg=Definiciones.COLOR_1)
         borde.columnconfigure(0, weight=1)
-        borde.grid(row=5, column=0, sticky='ew', pady=2)
-
+        borde.grid(row=6, column=0, sticky='ew', pady=2)
         #ACCESO RAPIDO,VENTAS
         self.btnSalir = ttk.Button(
             borde, 
@@ -96,6 +106,9 @@ class MenuPrincipal():
 
     def abrirVentanaFormProducto(self):
         ventanaFormProducto = FormProducto(0)
+        
+    def abrirVentanaConfiguraciones(self):
+        ventanaConfig = VentanaConfig()
 
 
     

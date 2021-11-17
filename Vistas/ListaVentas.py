@@ -2,7 +2,6 @@ import tkinter
 from tkinter import ttk
 from Controladores.VentasController import *
 from Helpers.Format_fechas import *
-from Singleton import singleton
 import Definiciones
 from Helpers import Imprimir_Reporte_Venta
 from Controladores import ClienteController, UsuarioController

@@ -14,7 +14,7 @@ class EmpresaController():
         datosEmpresaJson  = json.loads(req.text)
         return datosEmpresaJson
     
-    def editarDatosEmpresa(self, nombre, direccion, telefono, email, localidad, pais, sitio_web):
+    def editarDatosEmpresa(self, nombre, direccion, telefono, email, sitio_web):
         headers = {
             'Authorization' : LectorToken.obtenerToken()
         }
@@ -24,8 +24,6 @@ class EmpresaController():
             'direccion' : direccion,
             'telefono'  : telefono,
             'email'     : email,
-            'localidad' : localidad,
-            'pais'      : pais,
             'sitio_web' : sitio_web
         }
         
